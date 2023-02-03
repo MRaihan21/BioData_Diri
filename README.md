@@ -9,7 +9,7 @@ Fitur lain dari aplikasi ini meliputi:
 * Tombol Simpan dan Reset: memungkinkan pengguna untuk menyimpan informasi mereka atau membatalkan semua informasi yang dimasukkan dan mengosongkan formulir.
 
 ### Screenshots
-![Form](https://user-images.githubusercontent.com/93025188/216541372-396c8ce8-5440-4928-8f5a-b6cc4184f03b.png)
+![form2](https://user-images.githubusercontent.com/93025188/216548355-b134811d-54b6-4177-bd95-70ed46400496.png)
 
 Kode sumber tersedia untuk diunduh dari repository GitHub ini dan siap digunakan. Aplikasi ini sederhana dan cocok untuk pemula yang ingin belajar membuat aplikasi menggunakan Java. 🚀
 
