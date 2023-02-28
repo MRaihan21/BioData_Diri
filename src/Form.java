@@ -27,12 +27,13 @@ public class Form implements ActionListener {
         JFrame form = new JFrame("BioData Diri");
         // ukuran Form
         form.setSize(400, 550);
+        form.setResizable(false);
         // mengatur fungsi close Form
         form.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         // display ditengah
         form.setLocationRelativeTo(null);
-        form.setIconImage(new ImageIcon("C:\\Users\\A C E R\\Downloads\\JavaPicture\\form.png").getImage());        
+        form.setIconImage(new ImageIcon("C:\\Users\\A C E R\\Downloads\\JavaPicture\\form.png").getImage());
         form.getContentPane().setBackground(Color.gray);
         //mengatur layout manual
         form.setLayout(null);
@@ -59,7 +60,7 @@ public class Form implements ActionListener {
 
         labelNama2 = new JTextField();
         labelNama2.setBounds(150, 80, 150, 25);
-        labelNama2.setEditable(true);        
+        labelNama2.setEditable(true);
         form.add(labelNama2);
 
         /**
@@ -100,7 +101,7 @@ public class Form implements ActionListener {
         form.add(labelJKP);
 
         //membuat grup radio button
-        bGrup = new ButtonGroup();        
+        bGrup = new ButtonGroup();
         bGrup.add(labelJKL);
         bGrup.add(labelJKP);
 
@@ -116,7 +117,7 @@ public class Form implements ActionListener {
 
         //komponen combo box tanggal
         combo = new JComboBox(hari);
-        combo.setBounds(150, 170, 40, 25);        
+        combo.setBounds(150, 170, 40, 25);
         form.add(combo);
 
         String bulan[] = {"Jan", "Feb", "Mar", "Apr", "Mei", "Jun",
@@ -152,48 +153,56 @@ public class Form implements ActionListener {
 
         simpan.addActionListener(this);
         reset.addActionListener(this);
-        simpan.setActionCommand("simpan");
-        reset.setActionCommand("reset");
 
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        String com = e.getActionCommand();
 
-        switch (com) {
-            case "simpan":
+        
+        if (e.getSource() == simpan) {
+                        
+            String nama = labelNama2.getText();
+            String alamat = labelAlamat2.getText();
 
-                if (labelNama2.getText().isEmpty() || labelAlamat2.getText().isEmpty() || tahun.getText().isEmpty()
-                       || !bGrup.isSelected(labelJKL.getModel()) && !bGrup.isSelected(labelJKP.getModel())
-                        || combo.getSelectedIndex() == -1 || combo2.getSelectedIndex() == -1){
-                    JOptionPane.showMessageDialog(null, "Pastikan Semua Input Terisi", "Error", JOptionPane.ERROR_MESSAGE);                   
+            String jenisKelamin = "";
+            if (labelJKL.isSelected()) {
+                jenisKelamin = "Laki-Laki";
+            } else if (labelJKP.isSelected()) {
+                jenisKelamin = "Perempuan";
+            }
+
+            String tanggal = (String) combo.getSelectedItem();
+            String bulan = (String) combo2.getSelectedItem();
+
+            String tahunn = tahun.getText();
+
+           
+                if (nama.isEmpty() || alamat.isEmpty() || tahunn.isEmpty()
+                        || bGrup.getSelection() == null) {
+                    JOptionPane.showMessageDialog(null, "Pastikan Semua Input Terisi", "Error", JOptionPane.ERROR_MESSAGE);
                 } else {
                     JOptionPane.showMessageDialog(null, "Data Tersimpan");
                 }
+          
+        } else if (e.getSource() == reset) {
+            if (e.getSource() == reset) {
+                labelNama2.setText("");
+                labelAlamat2.setText("");
+                tahun.setText("");
+                combo.setSelectedIndex(0);
+                combo2.setSelectedIndex(0);
 
-// combo, combo2;
-                
-                break;
-            case "reset":
                 if (e.getSource() == reset) {
-                    labelNama2.setText("");
-                    labelAlamat2.setText("");
-                    tahun.setText("");
-                    combo.setSelectedIndex(0);
-                    combo2.setSelectedIndex(0);
+                    bGrup.clearSelection();
+                }
+            }
+            JOptionPane.showMessageDialog(null, "Reset Berhasil");
 
-                    if (e.getSource() == reset) {
-                        bGrup.clearSelection();
-                    }
-                } 
-                JOptionPane.showMessageDialog(null, "Reset Berhasil");
-
-                break;
-            default:
-                System.err.println("Error");
-
+        } else {            
+            JOptionPane.showMessageDialog(null, "ERROR");
         }
+
     }
 
 }
